@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+</html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<div id=app>
+    <div class="container">
+        <img :src="imgSrc" :title="imgTitle" alt="">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const apiKey = 'qtbDAzGCDR7zrNAypKP7VrE3zxUyL76W9nFsp1at';
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            imgSrc: '',
+            imgTitle: ''
+        }
+    });
+
+    fetch(url)
+        .then((res) => res.json())
+        .then((val) => {
+            // console.log(JSON.stringify(val))
+            console.log(val)
+            
+            vm.imgSrc = val.url;
+            vm.imgTitle = val.title;
+        });
+</script>

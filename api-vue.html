@@ -22,16 +22,21 @@
         data: {
             imgSrc: '',
             imgTitle: ''
+        },
+        created: function () {
+            this.fetchApod();
+        },
+        methods: {
+            fetchApod: () => {
+                fetch(url)
+                .then((res) => res.json())
+                .then((val) => {
+                    // console.log(JSON.stringify(val))
+                    console.log(val)
+                    vm.imgSrc = val.url;
+                    vm.imgTitle = val.title;
+                });
+            }
         }
     });
-
-    fetch(url)
-        .then((res) => res.json())
-        .then((val) => {
-            // console.log(JSON.stringify(val))
-            console.log(val)
-            
-            vm.imgSrc = val.url;
-            vm.imgTitle = val.title;
-        });
 </script>

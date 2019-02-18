@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 </html>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
 <div id=app>
     <div class="container">
-        <form v-if="!submitted" class="mt-5">
+            <!-- v-if="!submitted" also works as conditional -->
+        <form v-show="!submitted" class="mt-5">
             <div class="form-group">
                 <label for="email">Email</label>
                 <!-- v-bind:value="email" or :value="email" work the same to display data into a property -->
@@ -12,6 +17,9 @@
             </div>
             <button type="submit" v-on:click.prevent="process" class="btn btn-primary">Submit</button>
         </form>
+        <!-- v-if="submitted" or v-else can be used when elements are siblings that render based on opposite conditions -->
+        <!-- v-show="submitted" hides element using css and so is non-destructive -->
+        <h2 v-show="submitted" v-cloak class="mt-5">Thank You!</h2>
     </div>
 </div>
 

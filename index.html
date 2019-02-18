@@ -4,7 +4,7 @@
 
 <div id=app>
     <div class="container">
-        <form class="mt-5">
+        <form v-if="!submitted" class="mt-5">
             <div class="form-group">
                 <label for="email">Email</label>
                 <!-- v-bind:value="email" or :value="email" work the same to display data into a property -->
@@ -20,12 +20,13 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            email: 'lou@example.com'
+            email: 'lou@example.com',
+            submitted: false
         },
         methods: {
             process: function(evt) {
                 // evt.preventDefault();
-                alert(`Submitted ${this.email}`);
+               this.submitted = true;
             }
         }
     });

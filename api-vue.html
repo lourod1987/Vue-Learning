@@ -5,36 +5,43 @@
     [v-cloak] {
         display: none;
     }
+    img {
+        margin: auto;
+        max-width: 800px;
+    }
 </style>
 <div id=app>
     <div class="container">
-        <img :src="imgSrc" :title="imgTitle" alt="">
+        <!-- <img :src="imgSrc" :title="imgTitle" alt=""> -->
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
     const apiKey = 'qtbDAzGCDR7zrNAypKP7VrE3zxUyL76W9nFsp1at';
-    const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+    // const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+    const url = `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${apiKey}`;
 
     let vm = new Vue({
         el: '#app',
         data: {
-            imgSrc: '',
-            imgTitle: ''
+            // imgSrc: '',
+            // imgTitle: ''
+            asteroids: []
         },
         created: function () {
-            this.fetchApod();
+            this.fetchAsteroids();
         },
         methods: {
-            fetchApod: () => {
+            fetchAsteroids: () => {
                 fetch(url)
                 .then((res) => res.json())
                 .then((val) => {
                     // console.log(JSON.stringify(val))
-                    console.log(val)
-                    vm.imgSrc = val.url;
-                    vm.imgTitle = val.title;
+                    // console.log(val)
+                    // vm.imgSrc = val.url;
+                    // vm.imgTitle = val.title;
+                    vm.asteroids = val.near_earth_objects.slice(0, 10);
                 });
             }
         }

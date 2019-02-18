@@ -10,7 +10,7 @@
                 <!-- v-bind:value="email" or :value="email" work the same to display data into a property -->
                 <input type="email" v-model="email" class="form-control form-control-lg">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" v-on:click="process" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
@@ -21,6 +21,11 @@
         el: '#app',
         data: {
             email: 'lou@example.com'
+        },
+        methods: {
+            process: function() {
+                alert(`Submitted ${this.email}`);
+            }
         }
     });
 </script>

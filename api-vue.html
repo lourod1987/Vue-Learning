@@ -23,7 +23,7 @@
                 <p>showing {{numAsteroids}} items</p>
                 <p>{{closestObject}} has the shortest miss distance.</p>
             </div>
-            <table class="table">
+            <table class="table table-striped">
                 <thead class="thead-dark">
                     <th>#</th>
                     <th>Name</th>
@@ -32,7 +32,8 @@
                     <th>Remove</th>
                 </thead>
                 <tbody v-cloak>
-                    <tr v-for="(asteroid, index) in asteroids" :key="asteroid.neo_reference_id">
+                    <tr v-for="(asteroid, index) in asteroids" :key="asteroid.neo_reference_id"
+                    :style="getRowStyle(asteroid)">
                         <td>{{index + 1}}</td>
                         <td>{{asteroid.name}}</td>
                         <td>{{getCloseApproachDate(asteroid)}}</td>
@@ -107,6 +108,14 @@
             },
             remove: function (index) {
                 this.asteroids.splice(index, 1);
+            },
+            getRowStyle: (asteroid) => {
+                if (asteroid.close_approach_data.length === 0) {
+                    return {
+                        border: 'solid 3px red',
+                        color: 'red'
+                    };
+                }
             }
         }
     });

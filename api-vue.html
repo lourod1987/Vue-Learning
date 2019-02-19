@@ -28,7 +28,7 @@
                     <th>Remove</th>
                 </thead>
                 <tbody v-cloak>
-                    <tr v-for="(asteroid, index) in asteroids">
+                    <tr v-for="(asteroid, index) in asteroids" :key="asteroid.neo_reference_id">
                         <td>{{index + 1}}</td>
                         <td>{{asteroid.name}}</td>
                         <td>{{getCloseApproachDate(asteroid)}}</td>

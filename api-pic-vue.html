@@ -21,7 +21,10 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
     Vue.component('a-pod', {
-        template: '<img :src="imgSrc" :title="imgTitle">',
+        template: '<div>\
+                    <img :src="imgSrc" :title="imgTitle">\
+                    <p>{{date || "today"}}</p>\
+                   </div>',
         props: ['date'],
         data: function () {
             return {

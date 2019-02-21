@@ -1,5 +1,6 @@
 // requires Vue.js and Bootstrap
-Vue.component('asteroid-grid', {        
+Vue.component('asteroid-grid', {
+    props: ['asteroids', 'header'],
     data: function() {
         return {            
             showSummary: true
@@ -45,7 +46,7 @@ Vue.component('asteroid-grid', {
         }
     },
     template: '<div class="card mt-5"> \
-                    <h2 class="card-header">Near-Earth Objects</h2> \
+                    <h2 class="card-header">{{header}}</h2> \
                     <transition name="shooting-star"> \
                         <div class="mt-3 ml-3" v-cloak v-if="numAsteroids > 0 && showSummary"> \
                             <p>showing {{numAsteroids}} items</p> \

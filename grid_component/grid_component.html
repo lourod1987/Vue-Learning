@@ -5,7 +5,7 @@
 
 <div id="app">
     <div class="container">
-        <asteroid-grid></asteroid-grid>        
+        <asteroid-grid :asteroids="asteroids" header="Near-Earth Objects"></asteroid-grid>        
     </div> 
 </div>
 
@@ -22,14 +22,16 @@
             this.fetchAsteroids();
         },
         methods: {
-            fetchAsteroids: function () {
-                var apiKey = 'lkgI9to0hRizfzk4xTAxtNTTFkkA4Mtq7y1yW5me';
-                var url = 'https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=' + apiKey;
-                axios.get(url)
-                    .then(function (res) {                                       
-                        vm.asteroids = res.data.near_earth_objects.slice(0, 10);
-                    });
-            }
+            fetchAsteroids: 
+             function () {
+                var apiKey = 'qtbDAzGCDR7zrNAypKP7VrE3zxUyL76W9nFsp1at';
+                var url = `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${apiKey}`;
+                fetch(url)
+                .then((res) => res.json())
+                .then((val) => {
+                    vm.asteroids = val.near_earth_objects.slice(10, 20);
+                });
+            },
         }
     });    
 </script>

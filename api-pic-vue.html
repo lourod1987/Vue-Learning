@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+</html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    [v-cloak] {
+        display: none;
+    }
+    img {
+        margin: auto;
+        max-width: 800px;
+    }
+</style>
+<div id=app>
+    <div class="container">
+        <!-- <img :src="imgSrc" :title="imgTitle" alt=""> -->
+        <a-pod></a-pod>
+        <a-pod date="2018-08-07"></a-pod>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component('a-pod', {
+        template: '<img :src="imgSrc" :title="imgTitle">',
+        props: ['date'],
+        data: function () {
+            return {
+                imgSrc: '',
+                imgTitle: ''
+            };
+        },
+        created: function () {
+            this.fetchApod();
+        },
+        methods: {
+            fetchApod: function () {
+                var apiKey = 'qtbDAzGCDR7zrNAypKP7VrE3zxUyL76W9nFsp1at';
+                var url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+                if (this.date) {
+                    url += '&date=' + this.date;
+                }
+                const self = this;
+                fetch(url)
+                .then((res) => res.json())
+                .then((val) => {
+                    self.imgSrc = val.url;
+                    self.imgTitle = val.title;
+                });
+            },
+        }
+    })
+
+    // const apiKey = 'qtbDAzGCDR7zrNAypKP7VrE3zxUyL76W9nFsp1at';
+    // const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+    let vm = new Vue({
+        el: '#app',
+        // data: {
+        //     imgSrc: '',
+        //     imgTitle: ''
+        // },
+        // created: function () {
+        //     this.fetchAsteroids();
+        // },
+        // methods: {
+        //     fetchApod: () => {
+        //         fetch(url)
+        //         .then((res) => res.json())
+        //         .then((val) => {
+        //             // console.log(JSON.stringify(val))
+        //             // console.log(val)
+        //             vm.imgSrc = val.url;
+        //             vm.imgTitle = val.title;
+        //         });
+        //     },
+        // }
+    });
+</script>
